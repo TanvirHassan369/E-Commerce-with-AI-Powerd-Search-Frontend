@@ -1,63 +1,101 @@
-# 🛒 E-Commerce Frontend (Client)
+# Daily Bazar — E-Commerce Frontend (Client)
 
-The customer-facing frontend of a full-stack e-commerce platform. Built with React and Vite, featuring product browsing, cart management, checkout with payment integration, and AI-powered search.
-
----
-
-## ✨ Features
-
-- 🔐 User registration & login (JWT-based auth)
-- 🏠 Home page with hero slider, category grid & product slider
-- 🔍 Product search, filter & pagination
-- 🤖 AI-powered product search modal
-- 🛒 Shopping cart with Redux state persistence
-- 💳 Checkout with **SSLCOMMERZ** payment integration
-- 📦 Order tracking
-- 👤 User profile & account management
-- 🌙 Dark / Light theme toggle
-- 📱 Fully responsive design
+Customer-facing React storefront for **Daily Bazar**, a full-stack Bangladeshi e-commerce platform. Supports product browsing with AI-powered search, cart management, SSLCommerz & COD checkout, order tracking, and a 7-day return system.
 
 ---
 
-## 🧱 Tech Stack
+## Tech Stack
 
-| Technology | Purpose |
+| Layer | Technology |
 |---|---|
-| React 18 + Vite | UI framework & build tool |
-| Redux Toolkit + Redux Persist | State management |
-| React Router v6 | Client-side routing |
-| Tailwind CSS | Styling |
-| Axios | API communication |
-| Stripe | Payment processing |
-| React Toastify | Notifications |
-| Lucide React + React Icons | Icons |
+| Framework | React 18 + Vite |
+| State Management | Redux Toolkit + Redux Persist |
+| Routing | React Router v6 |
+| Styling | Tailwind CSS |
+| HTTP Client | Axios |
+| Payment | SSLCommerz (redirect flow) |
+| Icons | Lucide React, React Icons |
+| Notifications | React Toastify |
 
 ---
 
-## 📁 Project Structure
+## Features
+
+### Authentication
+- OTP-based email verification on registration (10-minute expiry)
+- JWT auth stored in HTTP-only cookie
+- Forgot password via email reset link
+- Update profile with avatar upload
+- Change password (current + new)
+
+### Product Browsing
+- Filter by price range, star rating (1–5), availability (in stock / limited / out of stock), and category
+- Full-text search via search bar
+- AI-powered semantic search using Gemini (via backend) with keyword fallback
+- Product detail page with multi-image gallery, zoom lightbox (keyboard navigation + thumbnails)
+- Size selector for Fashion products
+- Stock indicator (in stock / low stock / out of stock)
+- Discount price with percentage badge
+- Reviews tab — only purchasers can leave reviews
+
+### Cart & Checkout
+- Persistent cart via Redux Persist (survives page refresh)
+- Per-item quantity controls with stock limit enforcement
+- 5% tax + ৳100 shipping (free shipping over ৳5000)
+- Two payment methods:
+  - **SSLCommerz** — redirects to payment gateway (card, mobile banking)
+  - **Cash on Delivery (COD)** — pay on arrival
+- BD phone number validation (`01XXXXXXXXX` format)
+- Post-payment invoice download (print-ready HTML, opens in new tab)
+
+### Orders & Returns
+- Order history with status filter tabs (Processing / Shipped / Delivered / Cancelled / Returned)
+- Collapsible order detail with item images, size, price breakdown, shipping address
+- 7-day return request window (from `paid_at` date)
+- Return reasons: Damaged product, Wrong item, Not as described, Changed mind, Other
+- Return status tracking (Pending / Approved / Rejected) with admin notes
+
+### Other Pages
+- **Home** — Hero slider, category grid, New Arrivals & Top Rated product sliders, feature section, newsletter signup
+- **About** — Brand values and story
+- **Contact** — Login-gated form, email locked to registered address
+- **FAQ** — Accordion with 6 entries covering payments, shipping, returns
+- **404** — Custom not found page
+
+---
+
+## Project Structure
 
 ```
 Client/
-├── public/             # Static assets (images)
+├── public/                  # Static assets
 ├── src/
 │   ├── components/
-│   │   ├── Home/       # HeroSlider, CategoryGrid, ProductSlider, etc.
-│   │   ├── Layout/     # Navbar, Footer, CartSidebar, LoginModal, etc.
-│   │   └── Products/   # ProductCard, Pagination, AISearchModal, etc.
-│   ├── pages/          # Home, Cart, About, Contact, FAQ, etc.
-│   ├── contexts/       # ThemeContext
-│   ├── lib/            # Axios instance
-│   ├── data/           # Static product data
+│   │   ├── Home/            # HeroSlider, CategoryGrid, ProductSlider
+│   │   │                    # FeatureSection, NewsletterSection
+│   │   ├── Layout/          # Navbar, Footer, CartSidebar, LoginModal
+│   │   │                    # ProfilePanel, SearchOverlay, Sidebar
+│   │   └── Products/        # ProductCard, Pagination
+│   │                        # AISearchModal, ReviewsContainer
+│   ├── pages/               # Home, Products, ProductDetail, Cart
+│   │                        # Payment, Orders, PaymentSuccess
+│   │                        # PaymentFail, PaymentCancel, About
+│   │                        # Contact, FAQ, NotFound
+│   ├── store/
+│   │   └── slices/          # authSlice, productSlice, cartSlice
+│   │                        # orderSlice, popupSlice
+│   ├── contexts/            # ThemeContext (dark/light mode)
+│   ├── lib/                 # Axios instance
+│   ├── data/                # Static category list
 │   ├── App.jsx
 │   └── main.jsx
 ├── index.html
-├── package.json
-└── vite.config.js
+└── package.json
 ```
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js v18+
@@ -66,9 +104,7 @@ Client/
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/TanvirHassan369/E-Commerce-with-AI-Powerd-Search-Frontend
-# Navigate to client
+# Navigate to client folder
 cd "E-Commerce(CLIENT)/Client"
 
 # Install dependencies
@@ -81,15 +117,16 @@ npm run dev
 App runs at `http://localhost:5173`
 
 ### Environment Variables
-Create a `.env` file in the `Client/` directory:
-```
-VITE_API_URL=http://localhost:5000
-VITE_STRIPE_PUBLIC_KEY=your_stripe_public_key
+
+Create a `.env` file inside `Client/`:
+
+```env
+VITE_API_URL=http://localhost:5000/api/v1
 ```
 
 ---
 
-## 🔗 Related
+## Related Repositories
 
-- 🖥️ [Server (Backend)](https://github.com/TanvirHassan369/E-Commerce-with-AI-Powerd-Search-Backend)
+- ⚙️ [Server (Backend API)](https://github.com/TanvirHassan369/E-Commerce-with-AI-Powerd-Search-Backend)
 - 📊 [Admin Dashboard](https://github.com/TanvirHassan369/E-Commerce-with-AI-Powerd-Search-Dashboard)
