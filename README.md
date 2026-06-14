@@ -11,7 +11,7 @@ The customer-facing frontend of a full-stack e-commerce platform. Built with Rea
 - 🔍 Product search, filter & pagination
 - 🤖 AI-powered product search modal
 - 🛒 Shopping cart with Redux state persistence
-- 💳 Checkout with **Stripe** payment integration
+- 💳 Checkout with **SSLCOMMERZ** payment integration
 - 📦 Order tracking
 - 👤 User profile & account management
 - 🌙 Dark / Light theme toggle
@@ -61,14 +61,13 @@ Client/
 
 ### Prerequisites
 - Node.js v18+
-- Backend server running (see [Server README](../../ECommerce(SERVER)/Server/README.md))
+- Backend server running (see [Server README](https://github.com/TanvirHassan369/E-Commerce-with-AI-Powerd-Search-Backend/blob/main/README.md))
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/TanvirHassan369/ecommerce-fullstack.git
-
+git clone https://github.com/TanvirHassan369/E-Commerce-with-AI-Powerd-Search-Frontend
 # Navigate to client
 cd "E-Commerce(CLIENT)/Client"
 
@@ -92,5 +91,5 @@ VITE_STRIPE_PUBLIC_KEY=your_stripe_public_key
 
 ## 🔗 Related
 
-- 🖥️ [Server (Backend)](../../ECommerce(SERVER)/Server/README.md)
-- 📊 [Admin Dashboard](../../ECommerce(Dashboard)/ecommerce-dashboard-template/README.md)
+- 🖥️ [Server (Backend)](https://github.com/TanvirHassan369/E-Commerce-with-AI-Powerd-Search-Backend)
+- 📊 [Admin Dashboard](https://github.com/TanvirHassan369/E-Commerce-with-AI-Powerd-Search-Dashboard)
